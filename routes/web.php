@@ -7,4 +7,4 @@ Route::get('/', function () {
     return redirect()->route('diaries.index');
 });
 
-Route::resource('diaries', DiaryController::class);
+Route::resource('/diaries', DiaryController::class);

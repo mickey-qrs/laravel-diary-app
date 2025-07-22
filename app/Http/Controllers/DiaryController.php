@@ -6,13 +6,23 @@ use App\Models\Diary;
 use App\Http\Requests\StoreDiaryRequest;
 use App\Http\Requests\UpdateDiaryRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class DiaryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $diaries = Diary::latest()->paginate(config('diary.per_page'));
-        return view('diaries.index', compact('diaries'));
+
+        $keyword = $request->input('keyword');
+
+        $diaries = Diary::when($keyword, function ($query, $keyword) {
+            return $query->where('title', 'like', "%$keyword%")
+                ->orWhere('body', 'like', "%$keyword%");
+        })
+            ->latest()
+            ->paginate(config('diary.per_page'));
+
+        return view('diaries.index', compact('diaries', 'keyword'));
     }
 
     public function create()
@@ -26,6 +36,11 @@ class DiaryController extends Controller
 
         if ($request->hasFile('image')) {
             $data['image_path'] = $request->file('image')->store('images', 'public');
+        }
+
+        // タイトル未入力補完
+        if (empty($data['title'])) {
+            $data['title'] = now()->format('Y-m-d');
         }
 
         Diary::create($data);

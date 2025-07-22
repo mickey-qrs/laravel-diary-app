@@ -13,11 +13,13 @@ class DiaryFactory extends Factory
         // 今日から $sequence 日前
         $daysAgo = self::$sequence++;
         $date = now()->subDays($daysAgo)->format('Y-m-d');
+        $dateTime = now()->subDays($daysAgo)->format('Y-m-d H:i:s');
 
         return [
-            'title' => $date . 'の日記',
+            'title' => $date,
             'body' => $this->faker->realText($maxNbChars = 250),
             'image_path' => null, // 画像はなし
+            'created_at' => $dateTime,
         ];
     }
 }

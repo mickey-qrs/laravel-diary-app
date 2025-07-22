@@ -8,6 +8,12 @@
     </a>
 </div>
 
+<form method="GET" action="{{ route('diaries.index') }}" class="mb-4">
+    <input type="text" name="keyword" placeholder="キーワード検索"
+        value="{{ $keyword ?? '' }}"
+        class="border px-3 py-1 rounded w-full md:w-1/3" />
+</form>
+
 @if ($diaries->isEmpty())
 <p class="text-gray-500">まだ投稿がありません。</p>
 @else
