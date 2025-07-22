@@ -1,39 +1,42 @@
-# Laravel 1行日記アプリ
+# プロジェクト内容
 
+Laravel 1行日記アプリ
 Laravelを使用して構築した、シンプルな1行日記アプリです。  
 1日1つの投稿を行い、画像（1枚）とともに一覧・編集・削除が可能です。
 
 ---
 
-## ✅ 機能一覧
+## 機能一覧
 
-- 日記の新規投稿（画像アップロード対応）
-- 日記の一覧表示（画像付き、ページネーションあり）
-- 日記の編集（画像変更時は旧画像を削除）
-- 日記の削除（画像も同時に削除）
-- レスポンシブ対応（Bootstrap使用）
-- `.env` で1ページあたりの件数を設定可能
-- Factory・Seederを使用してテストデータ作成
-- Observerを使用した画像ファイルの自動削除
+- 日記の新規投稿（画像(jpg)アップロード対応）
+- 日記の一覧表示（画像付き、ページネーション(5件ごと)あり、キーワード検索）
+- 日記の編集
+- 日記の削除
 
 ---
 
-## 🧱 技術スタック
+## バリデーション
 
-- Laravel 11 or 12
+- 日記の一覧表示（画像付き、ページネーション(5件ごと)あり、キーワード検索）
+- 日記は1日1投稿のみです。
+- 日記の本文は最大255文字で必須です。
+- 日記のタイトルは最大255文字で、設定しない場合は日付が入ります。
+- 日記の画像は2MBまでのjpg,jpeg拡張子を許容します。
+---
+
+## 動作環境
+
+- Laravel 11
 - PHP 8.2
 - MySQL 8.0
-- Bootstrap 5
-- Faker（ダミーデータ生成）
-- Laravel Observer
 
 ---
 
-## 🚀 セットアップ手順
+## セットアップ手順
 
 ```bash
 # プロジェクトをクローン
-git clone https://github.com/your-username/laravel-diary-app.git
+git clone https://github.com/mickey-qrs/laravel-diary-app.git
 cd laravel-diary-app
 
 # 依存パッケージのインストール
@@ -43,9 +46,7 @@ composer install
 cp .env.example .env
 php artisan key:generate
 
-# .env内のDB接続情報を編集しておく
-
-# マイグレーションとシーディング
+# マイグレーションとシーディング（日記データを10件追加します。）
 php artisan migrate --seed
 
 # ストレージリンクの作成（画像表示用）
@@ -53,3 +54,5 @@ php artisan storage:link
 
 # ローカル開発サーバ起動
 php artisan serve
+
+
