@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('diaries', function (Blueprint $table) {
             $table->id();
-            $table->text('content');
-            $table->string('image_path')->nullable();
+            $table->string('title', 255);
+            $table->text('body')->nullable();
+            $table->string('image_path')->nullable(); // 画像のパス
             $table->timestamps();
         });
     }
