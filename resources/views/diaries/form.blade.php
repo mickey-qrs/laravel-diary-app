@@ -17,7 +17,7 @@
 
 {{-- 本文 --}}
 <div class="mb-4">
-    <label class="block text-gray-700 font-semibold mb-1">本文</label>
+    <label class="block text-gray-700 font-semibold mb-1">本文<span class="text-red-700">*<span></label>
     <textarea name="body"
         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         rows="4">{{ old('body', $diary->body ?? '') }}</textarea>
