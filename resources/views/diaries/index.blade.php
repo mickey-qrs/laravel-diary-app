@@ -3,7 +3,7 @@
 @section('content')
 <div class="flex justify-between items-center mb-6">
     <h2 class="text-2xl font-bold">1行日記一覧</h2>
-    <a href="{{ route('diaries.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+    <a href="{{ route('diaries.create', request()->query()) }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
         新規投稿
     </a>
 </div>
@@ -33,7 +33,7 @@
 
             {{-- 編集・削除ボタン --}}
             <div class="mt-4 flex justify-end space-x-2">
-                <a href="{{ route('diaries.edit', $diary) }}"
+                <a href="{{ route('diaries.edit', ['diary' => $diary->id] + request()->query()) }}"
                     class="bg-blue-500 hover:bg-blue-600 text-white text-sm px-4 py-2 rounded">
                     編集
                 </a>
@@ -53,7 +53,7 @@
 
 {{-- ページネーション --}}
 <div class="mt-6">
-    {{ $diaries->links('pagination::tailwind') }}
+    {{ $diaries->appends(request()->query())->links('pagination::tailwind') }}
 </div>
 @endif
 @endsection

@@ -16,7 +16,7 @@
         @endif
         @include('diaries.form', ['diary' => $diary])
         <div class="flex justify-between items-center pt-4">
-            <a href="{{ route('diaries.index') }}" class="text-sm text-blue-600 hover:underline">← 一覧に戻る</a>
+            <a href="{{ route('diaries.index', request()->query()) }}" class="text-sm text-blue-600 hover:underline">← 一覧に戻る</a>
             <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded transition">更新</button>
         </div>
     </form>
