@@ -28,18 +28,6 @@ class StoreDiaryRequest extends FormRequest
         ];
     }
 
-    public function withValidator(Validator $validator)
-    {
-        $validator->after(function ($validator) {
-            $today = Carbon::today();
-            $exists = Diary::whereDate('created_at', $today)->exists();
-
-            if ($exists) {
-                $validator->errors()->add('created_at', '本日はすでに日記を投稿しています。');
-            }
-        });
-    }
-
     public function authorize(): bool
     {
         return true;

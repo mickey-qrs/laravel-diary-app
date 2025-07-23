@@ -19,7 +19,6 @@ class DiaryFactory extends Factory
             'title' => $date->toDateString(), // 'Y-m-d' 形式
             'body' => $this->faker->realText(250),
             'image_path' => null,
-            'created_at' => $date,
         ];
     }
 }
