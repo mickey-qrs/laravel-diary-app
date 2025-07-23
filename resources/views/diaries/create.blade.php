@@ -7,10 +7,11 @@
     <form action="{{ route('diaries.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @include('diaries.form')
-        <div class="text-right">
-            <button type="submit"
-                class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded transition">投稿する</button>
+        <div class="flex justify-between items-center pt-4">
+            <a href="{{ route('diaries.index') }}" class="text-sm text-blue-600 hover:underline">← 一覧に戻る</a>
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded transition">投稿</button>
         </div>
     </form>
 </div>
+
 @endsection

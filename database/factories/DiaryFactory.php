@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class DiaryFactory extends Factory
@@ -12,14 +13,13 @@ class DiaryFactory extends Factory
     {
         // 今日から $sequence 日前
         $daysAgo = self::$sequence++;
-        $date = now()->subDays($daysAgo)->format('Y-m-d');
-        $dateTime = now()->subDays($daysAgo)->format('Y-m-d H:i:s');
+        $date = Carbon::now()->subDays($daysAgo);
 
         return [
-            'title' => $date,
-            'body' => $this->faker->realText($maxNbChars = 250),
-            'image_path' => null, // 画像はなし
-            'created_at' => $dateTime,
+            'title' => $date->toDateString(), // 'Y-m-d' 形式
+            'body' => $this->faker->realText(250),
+            'image_path' => null,
+            'created_at' => $date,
         ];
     }
 }
