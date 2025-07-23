@@ -38,11 +38,6 @@ class DiaryController extends Controller
             $data['image_path'] = $request->file('image')->store('images', 'public');
         }
 
-        // タイトル未入力補完
-        if (empty($data['title'])) {
-            $data['title'] = now()->format('Y-m-d');
-        }
-
         Diary::create($data);
 
         return redirect()->route('diaries.index')->with('success', '日記を投稿しました');
